@@ -4,14 +4,14 @@ Custom QMK firmware for the **NuPhy Halo96 V2 QMK/VIA ANSI**. It sends the keybo
 
 ## Install
 
-1. Download `nuphy_halo96_v2_ansi_battery_charging.bin` and `SHA256SUMS.txt` from the firmware release. Confirm your keyboard is the QMK/VIA ANSI edition with the single-row Enter key.
+1. Download `nuphy_halo96_v2_ansi_battery_debounce.bin` and `SHA256SUMS.txt`. Confirm your keyboard is the QMK/VIA ANSI edition with the single-row Enter key. [Latest firmware release](https://github.com/ollycrossley/nuphy-custom-firmware/releases/latest)
 2. Flash the `.bin` to the **keyboard** over USB using QMK Toolbox. The build targets the factory v2.1.5 radio and receiver firmware. [NuPhy flashing guide](https://nuphy.com/pages/update-instructions)
 3. Switch to **Wireless** and tap **Fn + 4**. Use a battery-monitor build that supports the custom Halo96 V2 reports. Displaying active charging requires charging support in the app as well.
 
 Use this command in PowerShell to compare the downloaded firmware with `SHA256SUMS.txt`.
 
 ```powershell
-Get-FileHash .\nuphy_halo96_v2_ansi_battery_charging.bin -Algorithm SHA256
+Get-FileHash .\nuphy_halo96_v2_ansi_battery_debounce.bin -Algorithm SHA256
 ```
 
 ## Test and recover
@@ -29,6 +29,7 @@ To restore factory behavior, flash the official ANSI keyboard firmware with the 
 ## Source and releases
 
 - [Protocol, build command, and test procedure](docs/halo96-v2-battery-telemetry.md)
+- [v0.1.1 release notes](docs/releases/v0.1.1.md)
 - [v0.1.0 release notes](docs/releases/v0.1.0.md)
 
 This project is based on [NuPhy's published QMK source](https://github.com/nuphy-src/qmk_firmware/tree/f1856912d603800eaca227ae2e1c5c8548fdf261). The [GPLv2 license](LICENSE) and upstream notices are retained.

@@ -23,10 +23,10 @@ Build from a configured QMK environment with the pinned dependencies and telemet
 
 ```sh
 git submodule update --init -- lib/chibios lib/chibios-contrib lib/lufa lib/printf
-make SKIP_GIT=yes nuphy/halo96_v2/ansi:via TARGET=nuphy_halo96_v2_ansi_battery_charging NUPHY_BATTERY_TELEMETRY=yes
+make SKIP_GIT=yes nuphy/halo96_v2/ansi:via TARGET=nuphy_halo96_v2_ansi_battery_debounce NUPHY_BATTERY_TELEMETRY=yes
 ```
 
-Flash `nuphy_halo96_v2_ansi_battery_charging.bin` to the **Halo96 V2 QMK/VIA ANSI** keyboard using QMK Toolbox over USB. Leave the onboard radio and dongle on their factory firmware. NuPhy provides the stock ANSI v2.1.5 keyboard binary for rollback through the same flash procedure. [NuPhy flashing guide](https://nuphy.com/pages/update-instructions) · [Stock keyboard firmware](https://cdn.shopify.com/s/files/1/0268/7297/1373/files/QMK_firmware_nuphy_halo96_v2_ansi_v2.1.5.bin?v=1741067981)
+Flash `nuphy_halo96_v2_ansi_battery_debounce.bin` to the **Halo96 V2 QMK/VIA ANSI** keyboard using QMK Toolbox over USB. Leave the onboard radio and dongle on their factory firmware. NuPhy provides the stock ANSI v2.1.5 keyboard binary for rollback through the same flash procedure. [NuPhy flashing guide](https://nuphy.com/pages/update-instructions) · [Stock keyboard firmware](https://cdn.shopify.com/s/files/1/0268/7297/1373/files/QMK_firmware_nuphy_halo96_v2_ansi_v2.1.5.bin?v=1741067981)
 
 Switch the keyboard to wireless, tap **Fn + 4**, and run the read-only test from the repository in PowerShell.
 
