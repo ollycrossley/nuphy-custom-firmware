@@ -31,27 +31,6 @@ QMK is largely written in C, with specific features and parts written in C++. It
 
 If you need help you can [open an issue](https://github.com/qmk/qmk_firmware/issues) or [chat on Discord](https://discord.gg/Uq7gcHh).
 
-# How Do I Make a Contribution?
-
-Never made an open source contribution before? Wondering how contributions work in QMK? Here's a quick rundown!
-
-0. Sign up for a [GitHub](https://github.com) account.
-1. [Find an issue](https://github.com/qmk/qmk_firmware/issues) you are interested in addressing, or [a feature](https://github.com/qmk/qmk_firmware/issues?q=is%3Aopen+is%3Aissue+label%3Afeature) you would like to add.
-2. Fork the repository associated with the issue to your GitHub account. This means that you will have a copy of the repository under `your-GitHub-username/qmk_firmware`.
-3. Clone the repository to your local machine using `git clone https://github.com/github-username/repository-name.git`.
-4. If you're working on a new feature consider opening an issue to talk with us about the work you're about to undertake.
-5. Create a new branch for your fix using `git checkout -b branch-name-here`.
-6. Make the appropriate changes for the issue you are trying to address or the feature that you want to add.
-7. Use `git add insert-paths-of-changed-files-here` to add the file contents of the changed files to the "snapshot" git uses to manage the state of the project, also known as the index.
-8. Use `git commit -m "Insert a short message of the changes made here"` to store the contents of the index with a descriptive message.
-9. Push the changes to your repository on GitHub using `git push origin branch-name-here`.
-10. Submit a pull request to [QMK Firmware](https://github.com/qmk/qmk_firmware/pull/new/master).
-11. Title the pull request with a short description of the changes made and the issue or bug number associated with your change. For example, you can title an issue like so "Added more log outputting to resolve #4352".
-12. In the description of the pull request explain the changes that you made, any issues you think exist with the pull request you made, and any questions you have for the maintainer. It's OK if your pull request is not perfect (no pull request is), the reviewer will be able to help you fix any problems and improve it!
-13. Wait for the pull request to be reviewed by a maintainer.
-14. Make changes to the pull request if the reviewing maintainer recommends them.
-15. Celebrate your success after your pull request is merged!
-
 # Coding Conventions
 
 Most of our style is pretty easy to pick up on. If you are familiar with either C or Python you should not have too much trouble with our local styles.

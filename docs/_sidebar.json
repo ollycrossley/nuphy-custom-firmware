@@ -82,9 +82,7 @@
                         "text": "Git Best Practices",
                         "items": [
                             { "text": "Introduction", "link": "/newbs_git_best_practices" },
-                            { "text": "Your Fork", "link": "/newbs_git_using_your_master_branch" },
-                            { "text": "Merge Conflicts", "link": "/newbs_git_resolving_merge_conflicts" },
-                            { "text": "Fixing Your Branch", "link": "/newbs_git_resynchronize_a_branch" }
+                            { "text": "Merge Conflicts", "link": "/newbs_git_resolving_merge_conflicts" }
                         ]
                     }
                 ]

@@ -6,14 +6,10 @@ External Userspace mirrors the structure of the main QMK Firmware repository, bu
 
 The build system will still honor the use of `users/<my keymap>` if you rely on the traditional QMK Firmware [userspace feature](feature_userspace) -- it's now supported externally too, using the same location inside the External Userspace directory.
 
-Additionally, there is first-class support for using GitHub Actions to build your keymaps, allowing you to automatically compile your keymaps whenever you push changes to your External Userspace repository.
+GitHub Actions can also compile External Userspace keymaps.
 
 ::: warning
 External Userspace is new functionality and may have issues. Tighter integration with the `qmk` command will occur over time.
-:::
-
-::: tip
-Historical keymap.json and GitHub-based firmware build instructions can be found [here](newbs_building_firmware_workflow). This document supersedes those instructions, but they should still function correctly.
 :::
 
 ## Setting up QMK Locally
@@ -83,7 +79,7 @@ qmk userspace-add -kb <keyboard> -km <keymap>
 qmk userspace-add <relative/path/to/my/keymap.json>
 ```
 
-This updates the `qmk.json` file in the root of your External Userspace directory. If you're using a git repository to store your keymaps, now is a great time to commit and push to your own fork.
+This updates the `qmk.json` file in the root of your External Userspace directory.
 
 ## Compiling External Userspace build targets
 
@@ -97,10 +93,10 @@ All firmware builds you've added to the External Userspace build targets will be
 
 ## Using GitHub Actions
 
-GitHub Actions can be used to automatically build your keymaps whenever you push changes to your External Userspace repository. If you have set up your list of build targets, this is as simple as enabling workflows in the GitHub repository settings:
+With your list of build targets configured, enable workflows in the External Userspace repository settings to use GitHub Actions for firmware builds.
 
 ![Repo Settings](https://i.imgur.com/EVkxOt1.png)
 
-Any push will result in compilation of all configured builds, and once completed a new release containing the newly-minted firmware files will be created on GitHub, which you can subsequently download and flash to your keyboard:
+After a successful build, download the firmware from the generated release and flash it to your keyboard.
 
 ![Releases](https://i.imgur.com/zmwOL5P.png)

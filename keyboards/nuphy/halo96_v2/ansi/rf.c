@@ -63,6 +63,51 @@ void           uart_receive_pro(void);
 void           m_break_all_key(void);
 uint16_t       host_last_consumer_usage(void);
 
+#ifdef NUPHY_BATTERY_TELEMETRY
+static uint32_t battery_sample_time;
+static uint32_t battery_report_time;
+static uint8_t battery_sample;
+static uint8_t battery_frame_level;
+static uint8_t battery_frame_step;
+static bool battery_sample_valid;
+static bool battery_sample_charging;
+static bool battery_report_started;
+
+static void battery_telemetry_task(void) {
+    if (dev_info.link_mode != LINK_RF_24 || dev_info.rf_state != RF_CONNECT || !f_dial_sw_init_ok) {
+        battery_sample_valid = false;
+        battery_report_started = false;
+        battery_frame_step = 0;
+        return;
+    }
+    if (host_last_consumer_usage() != 0) {
+        return;
+    }
+    if (battery_frame_step == 0) {
+        if (!battery_sample_valid || timer_elapsed32(battery_sample_time) > 1000) {
+            return;
+        }
+        if (battery_report_started && timer_elapsed32(battery_report_time) < 15000) {
+            return;
+        }
+        battery_frame_level = battery_sample;
+        battery_frame_step = battery_sample_charging ? 0 : 1;
+        battery_report_started = true;
+    } else if (timer_elapsed32(battery_report_time) < 50) {
+        return;
+    }
+
+    // Stock RF firmware carries these reserved Consumer Control usages as two-byte reports.
+    // Leave time between symbols because the radio modules keep one pending consumer report.
+    // The optional 0x0F prefix leaves the original percentage frame intact.
+    uint8_t usage[] = {0x0F, 0x07, 0x08 + (battery_frame_level >> 4), 0x10 + (battery_frame_level & 0x0F), 0};
+    uint8_t report[] = {usage[battery_frame_step], 0};
+    uart_send_report(CMD_RPT_CONSUME, report, sizeof(report));
+    battery_report_time = timer_read32();
+    battery_frame_step = (battery_frame_step + 1) % ARRAY_SIZE(usage);
+}
+#endif
+
 /**
  * @brief Uart auto nkey send
  */
@@ -133,6 +178,9 @@ void uart_send_report_func(void)
 {
     static uint32_t interval_timer = 0;
 
+#ifdef NUPHY_BATTERY_TELEMETRY
+    battery_telemetry_task();
+#endif
     if (dev_info.link_mode == LINK_USB) return;
     keyboard_protocol          = 1;
 
@@ -156,6 +204,10 @@ void uart_send_report_func(void)
  * @note Call in rf_driver.c
  */
 void uart_send_consumer_report(report_extra_t *report) {
+#ifdef NUPHY_BATTERY_TELEMETRY
+    // A physical media key takes precedence over an in-progress telemetry frame.
+    battery_frame_step = 0;
+#endif
     no_act_time = 0;
     uart_send_report(CMD_RPT_CONSUME, (uint8_t *)(&report->usage), 2);
 }
@@ -260,6 +312,19 @@ void RF_Protocol_Receive(void) {
                     }
 
                     dev_info.rf_charge = Usart_Mgr.RXDBuf[7];
+
+#ifdef NUPHY_BATTERY_TELEMETRY
+                    // Keep the raw level before the indicator substitutes 100% for a charge flag.
+                    // A short UART acknowledgment carries no status payload.
+                    if (Usart_Mgr.RXDLen >= 10) {
+                        battery_sample_valid = dev_info.link_mode == LINK_RF_24 && dev_info.rf_state == RF_CONNECT && Usart_Mgr.RXDBuf[8] <= 100;
+                        if (battery_sample_valid) {
+                            battery_sample = Usart_Mgr.RXDBuf[8];
+                            battery_sample_charging = dev_info.rf_charge == 0x03;  // Active charging, as in bat_led_show().
+                            battery_sample_time = timer_read32();
+                        }
+                    }
+#endif
 
                     if (Usart_Mgr.RXDBuf[8] <= 100) dev_info.rf_baterry = Usart_Mgr.RXDBuf[8];
                     if (dev_info.rf_charge & 0x01) dev_info.rf_baterry = 100;

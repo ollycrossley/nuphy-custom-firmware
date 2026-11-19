@@ -188,10 +188,6 @@ In most situations you will want to answer `y` to all of the prompts.
 The qmk home folder can be specified at setup with `qmk setup -H <path>`, and modified afterwards using the [cli configuration](cli_configuration#single-key-example) and the variable `user.qmk_home`. For all available options run `qmk setup --help`.
 :::
 
-::: tip
-If you already know how to use GitHub, [we recommend that you follow these instructions](getting_started_github) and use `qmk setup <github_username>/qmk_firmware` to clone your personal fork. If you don't know what that means you can safely ignore this message.
-:::
-
 ## 4. Test Your Build Environment
 
 Now that your QMK build environment is set up, you can build a firmware for your keyboard. Start by trying to build the keyboard's default keymap. You should be able to do that with a command in this format:

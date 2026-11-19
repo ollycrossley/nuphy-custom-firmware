@@ -8,7 +8,6 @@ If there are any inconsistencies with these recommendations, you're best off [cr
 
 - PR should be submitted using a non-`master` branch on the source repository
     - this does not mean you target a different branch for your PR, rather that you're not working out of your own master branch
-    - if submitter _does_ use their own `master` branch, they'll be given a link to the ["how to git"](newbs_git_using_your_master_branch) page after merging -- (end of this document will contain the contents of the message)
     - Note, frequently merging upstream with your branch is not needed and is discouraged. Valid reason for updating your branch may be resolving merge conflicts and pulling in new changes relevant to your PR.
 - PRs should contain the smallest amount of modifications required for a single change to the codebase
     - multiple keyboards at the same time is not acceptable
@@ -190,21 +189,6 @@ Also, specific to ChibiOS:
     - core is a lot more subjective given the breadth of posted changes
 
 ---
-
-## Notes
-
-For when people use their own `master` branch, post this after merge:
-```
-For future reference, we recommend against committing to your `master` branch as you've done here, because pull requests from modified `master` branches can make it more difficult to keep your QMK fork updated. It is highly recommended for QMK development – regardless of what is being done or where – to keep your master updated, but **NEVER** commit to it. Instead, do all your changes in a branch (branches are basically free in Git) and issue PRs from your branches when you're developing.
-
-There are instructions on how to keep your fork updated here:
-
-[**Best Practices: Your Fork's Master: Update Often, Commit Never**](newbs_git_using_your_master_branch)
-
-[Fixing Your Branch](newbs_git_resynchronize_a_branch) will walk you through fixing up your `master` branch moving forward. If you need any help with this just ask.
-
-Thanks for contributing!
-```
 
 ## Review Process
 
